@@ -10,6 +10,7 @@ from .helpers.PlayerData import *
 # Create your views here.
 def get_stream_widget(request, region, summoner_name):
     connector  = ApiConnector(region, 'RGAPI-b83d62d1-979d-49de-900d-6c17f8cabc52')
+    behavior_helper = PlayerBehavior()
 
     rank_to_number = {
         'I':'1',
@@ -23,6 +24,12 @@ def get_stream_widget(request, region, summoner_name):
 
     total_games = league['wins'] + league['losses']
     win_rate = round(league['wins']*100/total_games)
+
+    #TODO: Traer la matchlist de la base o de la api dependiendo si existe. INEFICIENTE. para implementar kda
+    #matchlist =  connector.get_last_games_by_account_id(summoner['accountId'], 5)
+    #stats = behavior_helper.get_stats_for_matchlist(connector, summoner, matchlist)
+
+
     summoner_info = {
         'tier':league['tier'].lower(),
         'rank':league['rank'],
@@ -31,8 +38,9 @@ def get_stream_widget(request, region, summoner_name):
         'wins':league['wins'],
         'losses':league['losses'],
         'win_rate': win_rate,
-        'total_games': total_games,
+        'wins': league['wins'],
+        'losses': league['losses'],
         'hot_streak': league['hotStreak'],
-        #'kda': get_kda(summoner)
+        #'kda': connector.get_kda(summoner)
         }
     return render(request, 'widget.html', context={'summoner_info':summoner_info,})

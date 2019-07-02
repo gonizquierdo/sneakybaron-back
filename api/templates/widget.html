@@ -17,8 +17,8 @@
           <span class="mb-1 lead">{{summoner_info.league_points}} LP</span>{% if summoner_info.hot_streak %} <i class="fas fa-bomb"></i> Hot streak!{% endif %}
         </div>
         <div>
-          <span class="text-capitalize m-0"><b>{{summoner_info.win_rate}}%</b> ({{summoner_info.total_games}})</span>
-          <span class="text-capitalize m-0">- <b>KDA ({{summoner_info.total_games}})</b></span>
+          <span class="text-capitalize m-0"><b>{{summoner_info.win_rate}}%</b></span>
+          <span class="text-capitalize m-0">/ <b class="text-primary">W:{{summoner_info.wins}}</b>-<b class="text-danger">L:{{summoner_info.losses}}</b></span>
           <p><small>Powered by SneakyBaron</small></p>
         </div>
       </div>

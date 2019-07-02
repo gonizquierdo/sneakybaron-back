@@ -18,7 +18,6 @@ class ApiConnector():
 
     def get_last_games_by_account_id(self,account_id, n_games=50):
         begin_index = 0
-
         if n_games < 100:
             return self._watcher.match.matchlist_by_account(self._region, account_id, end_index=n_games)['matches']
         else:
