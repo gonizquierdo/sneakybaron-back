@@ -13,8 +13,11 @@ class ApiConnector():
         return summoner
 
     def get_league_by_account_id(self, id):
-        league = self._watcher.league.by_summoner(self._region, id)
-        return league[0]
+        leagues = self._watcher.league.by_summoner(self._region, id)
+        for league in leagues:
+            if league['queueType'] == "RANKED_SOLO_5x5":
+                return league
+        raise Exception('No solo Q info')
 
     def get_last_games_by_account_id(self,account_id, n_games=50):
         begin_index = 0

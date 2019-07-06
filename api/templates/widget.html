@@ -14,7 +14,24 @@
       <div class="col col-8 pt-2 text-light">
         <div>
           <p class="text-capitalize mt-2 mb-1 lead">{{summoner_info.tier}} {{summoner_info.rank}}</p>
-          <span class="mb-1 lead">{{summoner_info.league_points}} LP</span>{% if summoner_info.hot_streak %} <i class="fas fa-bomb"></i> Hot streak!{% endif %}
+          <div class="text-inline">
+            {% if summoner_info.mini_series is not False  %}
+              {% for p in summoner_info.mini_series %}
+                  {% if p == 'N'  %}
+                    <span>-</span>
+                  {% endif %}
+                  {% if p == 'W'  %}
+                    <span class="text-success">✓</span>
+                  {% endif %}
+                  {% if p == 'L'  %}
+                    <span class="text-danger">x</span>
+                  {% endif %}
+              {% endfor %}
+            {% else %}
+              <span class="mb-1 lead">{{summoner_info.league_points}} LP</span>
+            {% endif %}
+            {% if summoner_info.hot_streak %}  🔥 Hot streak{% endif %}
+          </div>
         </div>
         <div>
           <span class="text-capitalize m-0"><b>{{summoner_info.win_rate}}%</b></span>
