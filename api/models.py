@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.crypto import get_random_string
 import uuid
 import os
-from base64 import standard_b64encode
+import random, string
 
+def generate_url():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=16))
 
 # Create your models here.
 class Summoner(models.Model):
@@ -17,11 +19,7 @@ class Summoner(models.Model):
 
     summoner_name = models.CharField(max_length=255)
     region_value = models.CharField(max_length=3, choices=REGIONS)
-    url = models.CharField(max_length=20, blank=True)
+    url = models.CharField(max_length=20, unique=True, default=generate_url)
 
     def __str__(self):
         return self.summoner_name
-
-    def save(self, *args, **kwargs):
-        self.url = standard_b64encode(os.urandom(14)).decode('utf-8')
-        super().save(*args, **kwargs)
