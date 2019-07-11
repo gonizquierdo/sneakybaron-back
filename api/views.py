@@ -16,7 +16,7 @@ def get_stream_widget(request, code):
     region = summoner.region_value
     summoner_name = summoner.summoner_name
 
-    connector  = ApiConnector(region, 'RGAPI-f2369e90-c15e-4f5e-8478-7ebcbd745741')
+    connector  = ApiConnector(region, 'RGAPI-0f99903a-6ac3-48eb-88d6-257dba63ccde')
     behavior_helper = PlayerBehavior()
 
     rank_to_number = {
