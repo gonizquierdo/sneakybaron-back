@@ -1,3 +1,7 @@
+import json
+import urllib
+import os
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.template.response import TemplateResponse
@@ -6,8 +10,7 @@ from riotwatcher import RiotWatcher, ApiError
 from .helpers.ApiConnector import ApiConnector
 from .helpers.PlayerBehavior import PlayerBehavior
 from .helpers.PlayerData import *
-import json
-import urllib
+
 
 # Create your views here.
 def get_stream_widget(request, code):
@@ -16,7 +19,7 @@ def get_stream_widget(request, code):
     region = summoner.region_value
     summoner_name = summoner.summoner_name
 
-    connector  = ApiConnector(region, 'RGAPI-0f99903a-6ac3-48eb-88d6-257dba63ccde')
+    connector  = ApiConnector(region, os.getenv('RIOT_API_KEY'))
     behavior_helper = PlayerBehavior()
 
     rank_to_number = {

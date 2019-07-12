@@ -3,6 +3,7 @@ chardet==3.0.4
 Django==2.2.3
 django-cors-headers==3.0.2
 idna==2.8
+python-dotenv==0.10.3
 pytz==2019.1
 requests==2.22.0
 riotwatcher==2.6.0
