@@ -76,9 +76,3 @@ def get_new_widget(request):
         except:
             summoner = Summoner(summoner_name = summoner_name, region_value = region)
             return JsonResponse({'widget-url': summoner.url_pretty()})
-
-
-
-
-
-
