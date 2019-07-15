@@ -23,3 +23,6 @@ class Summoner(models.Model):
 
     def __str__(self):
         return self.summoner_name
+
+    def url_pretty(self):
+        return 'https://api.sneakybaron.gg/api/widget/{}'.format(self.url)
