@@ -65,7 +65,6 @@ def get_patch_info(request, patch, language):
         patch_json = json.loads(patch_file.read())
         return JsonResponse(patch_json)
 
-@csrf_exempt
 def get_new_widget(request):
     if request.method == 'POST':
         summoner_name = request.POST.get('summoner-name')
