@@ -5,6 +5,7 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.template.response import TemplateResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Summoner
 from riotwatcher import RiotWatcher, ApiError
 from .helpers.ApiConnector import ApiConnector
@@ -63,3 +64,15 @@ def get_patch_info(request, patch, language):
     with urllib.request.urlopen("https://sneaky-static-data.s3.us-east-2.amazonaws.com/parches/{}/{}.json".format(language, patch)) as patch_file:
         patch_json = json.loads(patch_file.read())
         return JsonResponse(patch_json)
+
+@csrf_exempt
+def get_new_widget(request):
+    if request.method == 'POST':
+        summoner_name = request.POST.get('summoner-name')
+        region = request.POST.get('region')
+        try:
+            summoner = get_object_or_404(Summoner, summoner_name = summoner_name, region_value = region)
+            return HttpResponse(summoner.url_pretty())
+        except:
+            summoner = Summoner(summoner_name = summoner_name, region_value = region)
+            return JsonResponse({'widget-url': summoner.url_pretty()})
